@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('head') %>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/workouts">Workouts</a></li>
+                <% if (typeof req !== 'undefined' && req.session && req.session.isLoggedIn) { %>
+                <li><a href="/dashboard">My Home</a></li>
+                <li>
+                    <form action="/accounts/logout" method="POST" style="display: inline;">
+                        <button type="submit" class="nav-logout-btn">Logout</button>
+                    </form>
+                </li>
+                <% } else { %>
+                <li><a href="/accounts/login">Login</a></li>
+                <li><a href="/accounts/register">Register</a></li>
+                <% } %>
+            </ul>
+        </nav>
+    </header>

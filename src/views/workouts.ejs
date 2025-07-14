@@ -1,0 +1,42 @@
+<%- include('partials/header') %>
+<main>
+    <h1><%= title %></h1>
+
+    <% if (workouts.length > 0) { %>
+        <div class="workouts-container <%= display === 'grid' ? 'grid-view' : 'details-view' %>">
+            <% workouts.forEach((workout) => { %>
+                <div class="workout-card">
+                    <h2 class="workout-name"><%= workout.name %></h2>
+                    <p class="workout-description"><%= workout.description %></p>
+
+                    <% if (workout.exercises && workout.exercises.length > 0) { %>
+                        <div class="exercise-list">
+                            <h3>Exercises:</h3>
+                            <ul>
+                                <% workout.exercises.forEach((exercise) => { %>
+                                    <li>
+                                        <strong><%= exercise.name %></strong> – 
+                                        <%= exercise.type %> targeting <%= exercise.bodypart %>
+                                    </li>
+                                <% }); %>
+                            </ul>
+                        </div>
+                    <% } else { %>
+                        <p class="no-exercises">No exercises yet for this workout.</p>
+                    <% } %>
+                </div>
+            <% }); %>
+        </div>
+
+        <div class="view-toggle">
+            <a href="?display=grid" class="<%= display === 'grid' ? 'active' : '' %>">Grid View</a> | 
+            <a href="?display=details" class="<%= display === 'details' ? 'active' : '' %>">Details View</a>
+        </div>
+    <% } else { %>
+        <div class="no-workouts">
+            <h2>No Workouts Found</h2>
+            <p>We're still building out our workout plans. Check back soon or <a href="/">return home</a>.</p>
+        </div>
+    <% } %>
+</main>
+<%- include('partials/footer') %>

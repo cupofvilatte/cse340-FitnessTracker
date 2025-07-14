@@ -1,0 +1,30 @@
+<%- include('partials/header') %>
+<main class="contact-main">
+    <h1>Contact Us</h1>
+    <p>If you have any questions, feedback, or issues, feel free to reach out!</p>
+
+    <form action="/contact" method="POST" class="contact-form">
+        <div class="form-group">
+            <label for="name">Your Name<span>*</span></label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Your Email<span>*</span></label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="subject">Subject<span>*</span></label>
+            <input type="text" id="subject" name="subject" required>
+        </div>
+
+        <div class="form-group">
+            <label for="message">Message<span>*</span></label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+        </div>
+
+        <button type="submit" class="cta-button">Send Message</button>
+    </form>
+</main>
+<%- include('partials/footer') %>

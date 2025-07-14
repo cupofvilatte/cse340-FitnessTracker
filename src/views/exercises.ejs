@@ -1,0 +1,74 @@
+<%- include('partials/header') %>
+<main>
+    <h1><%= title %></h1>
+
+    <% if (exercises && exercises.length > 0) { %>
+        <div class="exercise-container">
+            <% exercises.forEach((exercise, index) => { %>
+                <div 
+                    class="exercise-card" 
+                    data-index="<%= index %>"
+                >
+                    <div class="exercise-info">
+                        <h2 class="exercise-name"><%= exercise.name %></h2>
+                        <p class="exercise-meta">
+                            <strong>Type:</strong> <%= exercise.type %> |
+                            <strong>Body Part:</strong> <%= exercise.bodypart %>
+                        </p>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <div class="no-exercises">
+            <p>No exercises found for this workout.</p>
+        </div>
+    <% } %>
+
+    <p class="timestamp">Last updated: <%= timestamp %></p>
+
+    <!-- Modal -->
+    <div id="exercise-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h2 id="modal-name"></h2>
+            <p id="modal-description"></p>
+            <p id="modal-meta" class="exercise-meta"></p>
+        </div>
+    </div>
+
+    <!-- Modal Script -->
+    <script>
+        const exercises = JSON.stringify(exercises || []);
+
+        function openModal(index) {
+            const exercise = exercises[index];
+            document.getElementById('modal-name').textContent = exercise.name;
+            document.getElementById('modal-description').textContent = exercise.description || 'No description available.';
+            document.getElementById('modal-meta').textContent = `Type: ${exercise.type} | Body Part: ${exercise.bodypart}`;
+            document.getElementById('exercise-modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('exercise-modal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('exercise-modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.exercise-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const index = card.getAttribute('data-index');
+                    openModal(index);
+                });
+            });
+        });
+
+    </script>
+</main>
+<%- include('partials/footer') %>
