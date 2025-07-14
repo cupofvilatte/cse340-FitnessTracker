@@ -17,7 +17,9 @@ import aboutRoutes from './src/routes/about.js';
 
 import workoutRoutes from './src/routes/workouts/index.js';
 
-import accountRoutes from './src/routes/accounts/index.js'
+import accountRoutes from './src/routes/accounts/index.js';
+
+import favoritesRoutes from './src/routes/favorites/index.js';
 
 // import middleware
 import { addGlobalData } from './src/middleware/index.js';
@@ -69,16 +71,16 @@ app.use(session({
 app.use(flash());
 
 app.use((req, res, next) => {
-  // Pass flash messages grouped by type to locals
-  res.locals.flash = [];
+    // Pass flash messages grouped by type to locals
+    res.locals.flash = [];
 
-  // get success and error messages
-  const successMessages = req.flash('success').map(msg => ({ type: 'success', message: msg }));
-  const errorMessages = req.flash('error').map(msg => ({ type: 'error', message: msg }));
+    // get success and error messages
+    const successMessages = req.flash('success').map(msg => ({ type: 'success', message: msg }));
+    const errorMessages = req.flash('error').map(msg => ({ type: 'error', message: msg }));
 
-  res.locals.flash = [...successMessages, ...errorMessages];
-  
-  next();
+    res.locals.flash = [...successMessages, ...errorMessages];
+    
+    next();
 });
 
 
@@ -92,6 +94,8 @@ app.use('/about', aboutRoutes);
 app.use('/workouts', workoutRoutes);
 
 app.use('/accounts', accountRoutes);
+
+app.use('/favorites', favoritesRoutes);
 
 // When in development mode, start a WebSocket server for live reloading
 if (NODE_ENV.includes('dev')) {
@@ -117,10 +121,11 @@ if (NODE_ENV.includes('dev')) {
 app.listen(PORT, async () => {
     try {
         await testConnection();
-        await setupDatabase();
-        await insertInitialData();
-        await seedAdmin();
-        console.log('Database seeded with sample data!');
+        console.log('Database successfully connected!');
+        // await setupDatabase();
+        // await insertInitialData();
+        // await seedAdmin();
+        // console.log('Database seeded with sample data!');
 
     } catch (error) {
         console.error('Database setup failed', error);
