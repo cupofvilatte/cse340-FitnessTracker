@@ -122,7 +122,7 @@ app.listen(PORT, async () => {
         await seedAdmin();
         console.log('Database seeded with sample data!');
 
-    } catch {
+    } catch (error) {
         console.error('Database setup failed', error);
         process.exit(1);
     }
