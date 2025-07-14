@@ -1,0 +1,48 @@
+<%- include('partials/header') %>
+<main class="dashboard-main">
+    <section class="dashboard-welcome">
+        <h1>Welcome back, <%= user.email %>!</h1>
+        <p>You logged in at: <%= new Date(loginTime).toLocaleString() %></p>
+    </section>
+
+    <% if (flash && flash.length > 0) { %>
+        <section class="flash-messages">
+        <% flash.forEach(msg => { %>
+            <div class="flash <%= msg.type %>"><%= msg.message %></div>
+        <% }); %>
+        </section>
+    <% } %>
+
+    <section class="dashboard-section">
+        <h2>Your Favorite Workouts</h2>
+        <% if (favorites && favorites.length > 0) { %>
+        <ul class="workout-list">
+            <% favorites.forEach(workout => { %>
+            <li class="workout-item">
+                <h3><%= workout.name %></h3>
+                <p><%= workout.description %></p>
+            </li>
+            <% }); %>
+        </ul>
+        <% } else { %>
+        <p>You haven't added any favorite workouts yet.</p>
+        <% } %>
+    </section>
+
+    <section class="dashboard-section">
+        <h2>Your Custom Workouts</h2>
+        <% if (customWorkouts && customWorkouts.length > 0) { %>
+        <ul class="workout-list">
+            <% customWorkouts.forEach(workout => { %>
+            <li class="workout-item">
+                <h3><%= workout.name %></h3>
+                <p><%= workout.description %></p>
+            </li>
+            <% }); %>
+        </ul>
+        <% } else { %>
+        <p>You haven't created any custom workouts yet.</p>
+        <% } %>
+    </section>
+</main>
+<%- include('partials/footer') %>
