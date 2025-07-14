@@ -51,8 +51,10 @@ const createExercisesTable = `
 const createWorkoutsTable = `
     CREATE TABLE IF NOT EXISTS workouts (
         id SERIAL PRIMARY KEY,
-        name VARCHAR(100) NOT NULL UNIQUE,
+        name VARCHAR(100) NOT NULL,
         description TEXT,
+        user_id INTEGER REFERENCES users(id),
+        is_custom BOOLEAN DEFAULT FALSE,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 `;
@@ -65,6 +67,16 @@ const createWorkoutExercisesTable = `
         PRIMARY KEY (workout_id, exercise_id)
     );
 `;
+
+// Tracks favorite workouts per user
+const createUserFavoritesTable = `
+    CREATE TABLE IF NOT EXISTS user_favorites (
+        user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+        workout_id INTEGER REFERENCES workouts(id) ON DELETE CASCADE,
+        PRIMARY KEY (user_id, workout_id)
+    );
+`;
+
 
 const insertRoles = async () => {
     const roles = ['admin', 'customer'];
@@ -101,8 +113,12 @@ const setupDatabase = async () => {
         await db.query(createWorkoutExercisesTable);
         if (verbose) console.log('Workout-Exercises join table ready');
 
+        await db.query(createUserFavoritesTable);
+        if (verbose) console.log('User-Favorites table ready');
+
         if (verbose) console.log('Workouts database setup complete!');
         return true;
+
     } catch (err) {
         console.error('Database setup error:', err.message);
         throw err;
@@ -134,13 +150,16 @@ const insertExercise = async (name, description, typeName, bodyPartName) => {
     }
 };
 
-const insertWorkout = async (name, description) => {
+const insertWorkout = async (name, description, userId = null, isCustom = false) => {
     const res = await db.query(
-        `INSERT INTO workouts (name, description) VALUES ($1, $2) ON CONFLICT (name) DO UPDATE SET description = EXCLUDED.description RETURNING id`,
-        [name, description]
+        `INSERT INTO workouts (name, description, user_id, is_custom)
+            VALUES ($1, $2, $3, $4)
+            RETURNING id`,
+        [name, description, userId, isCustom]
     );
     return res.rows[0].id;
 };
+
 
 const linkExerciseToWorkout = async (workoutId, exerciseName) => {
     const exerciseRes = await db.query(`SELECT id FROM exercises WHERE name = $1`, [exerciseName]);
