@@ -114,7 +114,105 @@ footer {
     color: #666;
 }
 
+/** Workouts Page Styling **/
+
+.workouts-container {
+    margin: 2rem auto;
+    padding: 1rem;
+    max-width: 1200px;
+}
+
+.grid-view {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.details-view {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.workout-card {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+    transition: transform 0.2s ease;
+}
+
+.workout-card:hover {
+    transform: translateY(-4px);
+}
+
+.workout-name {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-1);
+}
+
+.workout-description {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.exercise-list h3 {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    color: var(--text-1);
+}
+
+.exercise-list ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    color: #444;
+}
+
+.no-exercises {
+    color: #999;
+    font-style: italic;
+}
+
+.view-toggle {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.view-toggle a {
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--text-1);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    transition: background-color 0.3s ease;
+}
+
+.view-toggle a.active {
+    background-color: var(--button);
+    color: white;
+}
+
+.view-toggle a:not(.active):hover {
+    background-color: #e0e0e0;
+}
+
+.no-workouts {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+}
+
+
 /** Exercises Page Styling **/
+
+.workout-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
 
 .exercise-container {
     display: grid;
