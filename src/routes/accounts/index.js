@@ -83,7 +83,7 @@ router.get('/dashboard', async (req, res) => {
         const favorites = await getUserFavorites(userId);
         const customWorkouts = await getUserWorkouts(userId);
 
-        res.render('accounts/dashboard', {
+        res.render('dashboard/index', {
             title: 'Account Dashboard',
             user: req.session.user,
             username: req.session.user,
