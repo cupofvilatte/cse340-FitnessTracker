@@ -28,7 +28,7 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const { username: email, password } = req.body;
- 
+
         // Basic validation
         if (!email || !password) {
             req.flash('error', 'Email and password are required');
@@ -37,10 +37,10 @@ router.post('/login', async (req, res) => {
                 errors: req.flash('error')
             });
         }
- 
+
         // Authenticate user
         const user = await authenticateUser(email, password);
- 
+
         if (!user) {
             req.flash('error', 'Invalid email or password');
             return res.render('accounts/login', {
@@ -48,16 +48,16 @@ router.post('/login', async (req, res) => {
                 errors: req.flash('error')
             });
         }
- 
+
         // Store user information in session
         req.session.isLoggedIn = true;
         req.session.user = user;
         req.session.loginTime = new Date();
- 
+
         // Flash success message and redirect
         req.flash('success', `Welcome back! You have successfully logged in.`);
         res.redirect('/accounts/dashboard');
- 
+
     } catch (error) {
         console.error('Login error:', error);
         req.flash('error', 'An error occurred during login. Please try again.');
@@ -104,6 +104,9 @@ router.get('/dashboard', async (req, res) => {
 router.post('/logout', (req, res) => {
     const userEmail = req.session.user?.email;
 
+    // Flash success message and redirect to home
+    req.flash('success', `Goodbye, ${userEmail || 'user'}! You have been successfully logged out.`);
+
     req.session.destroy((err) => {
         if (err) {
             console.error('Error destroying session:', err);
@@ -114,8 +117,6 @@ router.post('/logout', (req, res) => {
         // Clear the session cookie
         res.clearCookie('sessionId');
 
-        // Flash success message and redirect to home
-        req.flash('success', `Goodbye, ${userEmail}! You have been successfully logged out.`);
         res.redirect('/');
     });
 });

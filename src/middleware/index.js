@@ -19,5 +19,9 @@ export const addGlobalData = async (req, res, next) => {
     // Adding to res.locals makes this available to all views automatically
     res.locals.timestamp = now.toLocaleDateString('en-US', options);
 
+    res.locals.session = req.session;
+    res.locals.user = req.session.user || null;
+    res.locals.isLoggedIn = req.session.isLoggedIn || false;
+
     next();
 };

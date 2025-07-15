@@ -41,13 +41,11 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true}));
 
 app.set('view engine', 'ejs');
 
 app.set('views', path.join(__dirname, 'src/views'));
-
-// implement global middleware
-app.use(addGlobalData);
 
 // Configure PostgreSQL session store
 const PostgresStore = pgSession(session);
@@ -85,6 +83,8 @@ app.use((req, res, next) => {
     next();
 });
 
+// implement global middleware
+app.use(addGlobalData);
 
 // use routes
 app.use(indexRoutes);
