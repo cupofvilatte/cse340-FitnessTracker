@@ -1,0 +1,25 @@
+<%- include('partials/header') %>
+
+<main class="admin-message-detail">
+    <h1>Message Details</h1>
+
+    <div class="message-card">
+        <p><strong>From:</strong> <%= message.name %> (<a href="mailto:<%= message.email %>"><%= message.email %></a>)</p>
+        <p><strong>Subject:</strong> <%= message.subject %></p>
+        <p><strong>Received:</strong> <%= new Date(message.created_at).toLocaleString() %></p>
+
+        <hr>
+
+        <p><strong>Message:</strong></p>
+        <p><%= message.body %></p>
+    </div>
+
+    <div class="admin-actions">
+        <form action="/admin/messages/<%= message.id %>/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this message?')">
+            <button type="submit" class="cta-button danger">Delete Message</button>
+        </form>
+        <a href="/admin/messages" class="cta-button secondary">Back to Messages</a>
+    </div>
+</main>
+
+<%- include('partials/footer') %>

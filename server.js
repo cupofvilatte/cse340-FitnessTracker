@@ -22,6 +22,7 @@ import accountRoutes from './src/routes/accounts/index.js';
 import favoritesRoutes from './src/routes/favorites/index.js';
 
 import adminUserRoutes from './src/routes/admin/user.js';
+import adminMessageRoutes from './src/routes/admin/messages.js';
 
 // import middleware
 import { addGlobalData } from './src/middleware/index.js';
@@ -101,6 +102,7 @@ app.use('/accounts', accountRoutes);
 app.use('/favorites', favoritesRoutes);
 
 app.use('/admin/users', adminUserRoutes);
+app.use('/admin/messages', adminMessageRoutes);
 
 // When in development mode, start a WebSocket server for live reloading
 if (NODE_ENV.includes('dev')) {

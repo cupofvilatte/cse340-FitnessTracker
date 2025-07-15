@@ -1,0 +1,47 @@
+<%- include('partials/header') %>
+
+<main class="admin-messages-main">
+    <h1>Submitted Messages</h1>
+
+    <% if (flash.length) { %>
+        <ul class="flash-messages">
+            <% flash.forEach(msg => { %>
+                <li class="flash <%= msg.type %>"><%= msg.message %></li>
+            <% }) %>
+        </ul>
+    <% } %>
+
+    <% if (messages.length === 0) { %>
+        <p>No messages submitted yet.</p>
+    <% } else { %>
+        <table class="message-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Subject</th>
+                    <th>Submitted</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% messages.forEach(msg => { %>
+                    <tr>
+                        <td><%= msg.name %></td>
+                        <td><%= msg.email %></td>
+                        <td><%= msg.subject %></td>
+                        <td><%= new Date(msg.created_at).toLocaleString() %></td>
+                        <td>
+                            <a href="/admin/messages/<%= msg.id %>" class="cta-button small">View</a>
+                            <form action="/admin/messages/<%= msg.id %>/delete" method="POST" style="display:inline;">
+                                <button type="submit" class="cta-button small danger" onclick="return confirm('Delete this message?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } %>
+</main>
+
+<%- include('partials/footer') %>

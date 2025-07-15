@@ -77,6 +77,17 @@ const createUserFavoritesTable = `
     );
 `;
 
+const createMessagesTable = `
+    CREATE TABLE IF NOT EXISTS messages (
+        id SERIAL PRIMARY KEY,
+        name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        subject TEXT NOT NULL,
+        body TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+`;
+
 
 const insertRoles = async () => {
     const roles = ['admin', 'customer'];
@@ -115,6 +126,9 @@ const setupDatabase = async () => {
 
         await db.query(createUserFavoritesTable);
         if (verbose) console.log('User-Favorites table ready');
+
+        await db.query(createMessagesTable);
+        if (verbose) console.log('Messages table ready');
 
         if (verbose) console.log('Workouts database setup complete!');
         return true;
