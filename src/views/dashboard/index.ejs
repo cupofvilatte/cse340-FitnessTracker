@@ -1,4 +1,4 @@
-<%- include('partials/header') %>
+<%- include('../partials/header') %>
 <main class="dashboard-main">
     <section class="dashboard-welcome">
         <h1>Welcome back, <%= user.email %>!</h1>
@@ -44,5 +44,15 @@
         <p>You haven't created any custom workouts yet.</p>
         <% } %>
     </section>
+    <% if (user && user.role_name === 'admin') { %>
+        <section class="dashboard-section admin-tools">
+            <h2>Admin Tools</h2>
+            <ul class="admin-links">
+                <li><a href="/admin/users" class="cta-button">Manage Users</a></li>
+                <li><a href="/admin/messages" class="cta-button">View Messages</a></li>
+            </ul>
+        </section>
+    <% } %>
+
 </main>
-<%- include('partials/footer') %>
+<%- include('../partials/footer') %>
