@@ -39,7 +39,7 @@
 
     <!-- Modal Script -->
     <script>
-        const exercises = JSON.stringify(exercises || []);
+        const exercises = <%- JSON.stringify(exercises || []) %>;
 
         function openModal(index) {
             const exercise = exercises[index];

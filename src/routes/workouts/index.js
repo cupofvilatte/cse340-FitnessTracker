@@ -5,6 +5,8 @@ const router = Router();
 
 router.get('/', async (req, res) => {
     try {
+        const display = req.query.display === 'details' ? 'details' : 'grid';
+
         const workouts = await getAllWorkouts();
 
         for (const workout of workouts) {
@@ -15,7 +17,7 @@ router.get('/', async (req, res) => {
         res.render('workouts', {
             title: 'All Workouts',
             workouts,
-            display: 'grid'
+            display
         });
     } catch (error) {
         console.error('Error loading workouts:', error.message);

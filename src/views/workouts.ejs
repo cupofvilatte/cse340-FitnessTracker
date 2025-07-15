@@ -5,26 +5,28 @@
     <% if (workouts.length > 0) { %>
         <div class="workouts-container <%= display === 'grid' ? 'grid-view' : 'details-view' %>">
             <% workouts.forEach((workout) => { %>
-                <div class="workout-card">
-                    <h2 class="workout-name"><%= workout.name %></h2>
-                    <p class="workout-description"><%= workout.description %></p>
+                <a href="/exercises?workoutId=<%= workout.id %>" class="workout-link">
+                    <div class="workout-card">
+                        <h2 class="workout-name"><%= workout.name %></h2>
+                        <p class="workout-description"><%= workout.description %></p>
 
-                    <% if (workout.exercises && workout.exercises.length > 0) { %>
-                        <div class="exercise-list">
-                            <h3>Exercises:</h3>
-                            <ul>
-                                <% workout.exercises.forEach((exercise) => { %>
-                                    <li>
-                                        <strong><%= exercise.name %></strong> – 
-                                        <%= exercise.type %> targeting <%= exercise.bodypart %>
-                                    </li>
-                                <% }); %>
-                            </ul>
-                        </div>
-                    <% } else { %>
-                        <p class="no-exercises">No exercises yet for this workout.</p>
-                    <% } %>
-                </div>
+                        <% if (workout.exercises && workout.exercises.length > 0) { %>
+                            <div class="exercise-list">
+                                <h3>Exercises:</h3>
+                                <ul>
+                                    <% workout.exercises.forEach((exercise) => { %>
+                                        <li>
+                                            <strong><%= exercise.name %></strong> – 
+                                            <%= exercise.type %> targeting <%= exercise.bodypart %>
+                                        </li>
+                                    <% }); %>
+                                </ul>
+                            </div>
+                        <% } else { %>
+                            <p class="no-exercises">No exercises yet for this workout.</p>
+                        <% } %>
+                    </div>
+                </a>
             <% }); %>
         </div>
 

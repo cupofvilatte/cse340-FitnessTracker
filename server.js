@@ -12,10 +12,10 @@ import flash from 'connect-flash';
 import indexRoutes from './src/routes/index.js';
 
 import contactRoutes from './src/routes/contact.js';
-
 import aboutRoutes from './src/routes/about.js';
 
 import workoutRoutes from './src/routes/workouts/index.js';
+import exerciseRoutes from './src/routes/exercises/index.js';
 
 import accountRoutes from './src/routes/accounts/index.js';
 
@@ -94,6 +94,7 @@ app.use('/contact', contactRoutes);
 app.use('/about', aboutRoutes);
 
 app.use('/workouts', workoutRoutes);
+app.use('/exercises', exerciseRoutes);
 
 app.use('/accounts', accountRoutes);
 
