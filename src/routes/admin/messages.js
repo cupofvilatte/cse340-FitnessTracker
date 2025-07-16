@@ -6,8 +6,8 @@ const router = Router();
 
 // Middleware to restrict to admins only
 const ensureAdmin = (req, res, next) => {
-    if (!req.session.user || req.session.user.role !== 'admin') {
-        return res.status(403).render('403', { title: 'Access Denied' });
+    if (!req.session.user || req.session.user.role_name !== 'admin') {
+        return res.status(403).render('errors/403', { title: 'Access Denied' });
     }
     next();
 };
