@@ -556,3 +556,18 @@ footer {
     padding: 1rem;
     border-radius: 5px;
 }
+
+.error-main {
+    text-align: center;
+    padding: 3rem;
+}
+
+.error-main h1 {
+    font-size: 2.5rem;
+    color: var(--text-1);
+}
+
+.error-main p {
+    font-size: 1.2rem;
+    color: #666;
+}
