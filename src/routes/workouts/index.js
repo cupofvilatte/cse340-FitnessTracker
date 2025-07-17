@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { getAllWorkouts, getWorkoutById, getExercisesByWorkoutId } from '../../models/workouts/index.js';
+import { getUserFavorites } from '../../models/workouts/favorites.js';
 
 const router = Router();
 
@@ -14,10 +15,21 @@ router.get('/', async (req, res) => {
             workout.exercises = exercises;
         }
 
+        const user = req.session.user;
+
+        let favoriteIds = [];
+
+        if (user) {
+            const favorites = await getUserFavorites(user.id);
+            favoriteIds = favorites.map(fav => fav.id);
+        }
+
         res.render('workouts', {
             title: 'All Workouts',
             workouts,
-            display
+            display,
+            user,
+            favoriteIds
         });
     } catch (error) {
         console.error('Error loading workouts:', error.message);
@@ -32,7 +44,7 @@ router.get('/:id', async (req, res) => {
         const exercises = await getExercisesByWorkoutId(id);
 
         if (!workout) {
-            return res.status(404).render('404', { message: 'Workout nto found' });
+            return res.status(404).render('404', { message: 'Workout not found' });
         }
 
         res.render('workouts/exercises', {

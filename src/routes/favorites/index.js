@@ -42,7 +42,7 @@ router.post('/add/:workoutId', allowCustomers, async (req, res) => {
         console.error('Error adding to favorites:', err.message);
         req.flash('error', 'Could not add workout to favorites.');
     }
-    res.redirect('back');
+    res.redirect('/workouts');
 });
 
 /**
@@ -60,7 +60,7 @@ router.post('/remove/:workoutId', allowCustomers, async (req, res) => {
         console.error('Error removing from favorites:', err.message);
         req.flash('error', 'Could not remove workout from favorites.');
     }
-    res.redirect('back');
+    res.redirect('/workouts');
 });
 
 export default router;

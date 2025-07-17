@@ -25,6 +25,13 @@
                         <% } else { %>
                             <p class="no-exercises">No exercises yet for this workout.</p>
                         <% } %>
+                        <% if (user) { %>
+                    <form action="/favorites/<%= favoriteIds.includes(workout.id) ? 'remove' : 'add' %>/<%= workout.id %>" method="POST" class="favorite-form">
+                        <button type="submit" class="favorite-button <%= favoriteIds.includes(workout.id) ? 'favorited' : '' %>" title="<%= favoriteIds.includes(workout.id) ? 'Remove from Favorites' : 'Add to Favorites' %>">
+                        <%= favoriteIds.includes(workout.id) ? '💖' : '🩶' %>
+                        </button>
+                    </form>
+                <% } %>
                     </div>
                 </a>
             <% }); %>
