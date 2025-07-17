@@ -104,6 +104,43 @@ app.use('/favorites', favoritesRoutes);
 app.use('/admin/users', adminUserRoutes);
 app.use('/admin/messages', adminMessageRoutes);
 
+// 404 Error Handler
+app.use((req, res, next) => {
+    // Ignore error forwarding for expected missing assets
+    const quiet404s = [
+        '/favicon.ico',
+        '/robots.txt'
+    ];
+
+    // Also skip any paths under /.well-known/
+    const isQuiet404 = quiet404s.includes(req.path) || req.path.startsWith('/.well-known/');
+
+    if (isQuiet404) {
+        return res.status(404).send('Not Found');
+    }
+
+    // For all other routes, forward to the global error handler
+    const err = new Error('Page Not Found');
+    err.status = 404;
+    next(err);
+});
+
+app.use((err, req, res, next) => {
+    // Log the error for debugging
+    console.error(err.stack);
+
+    // Set default status and determine error type
+    const status = err.status || 500;
+    const context = {
+        title: status === 404 ? 'Page Not Found' : 'Internal Server Error',
+        error: err.message,
+        stack: err.stack,
+    };
+
+    // Render the appropriate template based on status code
+    res.status(status).render(`errors/${status === 404 ? '404' : '500'}`, context);
+});
+
 // When in development mode, start a WebSocket server for live reloading
 if (NODE_ENV.includes('dev')) {
     const ws = await import('ws');

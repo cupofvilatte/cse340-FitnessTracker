@@ -11,10 +11,35 @@
 }
 
 /** General Styling **/
+
 body {
     background-color: var(--background-1);
     color: var(--text-1);
     margin: auto 0;
+}
+
+ul {
+    list-style-type: none;
+}
+
+main {
+    text-align: center;
+    padding: 2rem;
+}
+
+button {
+    display: inline-block;
+    background-color: var(--button);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    box-shadow: 2px 3px 5px 4px var(--shadow);
 }
 
 /** Header/Footer Styling **/
@@ -66,10 +91,7 @@ footer {
 
 /** Home Page Styling **/
 
-.home-main {
-    text-align: center;
-    padding: 2rem;
-}
+
 
 .hero {
     background: var(--background-2);
@@ -88,21 +110,6 @@ footer {
     font-size: 1.2rem;
     color: #555;
     margin-bottom: 1.5rem;
-}
-
-.cta-button {
-    display: inline-block;
-    background-color: var(--button);
-    color: white;
-    padding: 0.75rem 1.5rem;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.cta-button:hover {
-    box-shadow: 2px 3px 5px 4px var(--shadow);
 }
 
 .features {
@@ -172,21 +179,25 @@ footer {
 }
 
 .favorite-form {
-  margin-top: 0.5rem;
-  text-align: right;
+    margin-top: 0.5rem;
+    text-align: right;
 }
 
-.favorite-button {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
+button.favorite-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: none;
 }
 
 .favorite-button.favorited {
-  color: hotpink;
+    color: hotpink;
 }
 
+.favorite-button:hover {
+    box-shadow: none;
+}
 
 .exercise-list h3 {
     margin-top: 1rem;
@@ -309,11 +320,6 @@ footer {
 
 /** About Page Styling **/
 
-.about-main {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-}
 
 .about-hero {
     background-color: var(--background-2);
@@ -354,7 +360,6 @@ footer {
 }
 
 .about-card ul {
-    list-style-type: disc;
     padding-left: 1.5rem;
 }
 
@@ -367,18 +372,13 @@ footer {
 
 /** Contacts Page Styling **/
 
-.contact-main {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-}
-
 .contact-main h1 {
     text-align: center;
     margin-bottom: 2rem;
 }
 
 .contact-form {
+    text-align: left;
     background: #ffffff;
     padding: 2rem;
     border-radius: 10px;
@@ -407,27 +407,8 @@ footer {
     resize: vertical;
 }
 
-.contact-form button {
-    background-color: var(--button);
-    color: #fff;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+/* Dashboard Styling */
 
-.contact-form button:hover {
-    background-color: var(--button);
-}
-
-/* === Dashboard Styling === */
-.dashboard-main {
-    max-width: 1000px;
-    margin: 2rem auto;
-    padding: 1rem;
-}
 
 .dashboard-welcome {
     text-align: center;
@@ -494,11 +475,6 @@ footer {
     gap: 1rem;
 }
 
-.add-workout-main h1 {
-    text-align: center;
-}
-
-
 .admin-tools .admin-links {
     display: flex;
     flex-direction: column;
@@ -506,21 +482,6 @@ footer {
     padding: 0;
     list-style: none;
     margin-top: 1rem;
-}
-
-.admin-links a.cta-button {
-    width: fit-content;
-    padding: 0.5rem 1.25rem;
-    font-size: 1rem;
-}
-
-.admin-users-main {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 1rem;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .admin-users-main h1 {
@@ -600,19 +561,4 @@ footer {
     color: #721c24;
     padding: 1rem;
     border-radius: 5px;
-}
-
-.error-main {
-    text-align: center;
-    padding: 3rem;
-}
-
-.error-main h1 {
-    font-size: 2.5rem;
-    color: var(--text-1);
-}
-
-.error-main p {
-    font-size: 1.2rem;
-    color: #666;
 }
