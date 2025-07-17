@@ -1,0 +1,22 @@
+<%- include('../partials/header') %>
+
+<main class="dashboard-add-workout">
+  <h1>Create a Custom Workout</h1>
+
+  <form action="/dashboard/workouts/create" method="POST" class="workout-form">
+    <div class="form-group">
+      <label for="name">Workout Name:</label>
+      <input type="text" name="name" id="name" required maxlength="100">
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea name="description" id="description" rows="5" maxlength="1000" required></textarea>
+    </div>
+
+    <button type="submit" class="cta-button">Save Workout</button>
+    <a href="/dashboard" class="cta-button secondary">Cancel</a>
+  </form>
+</main>
+
+<%- include('../partials/footer') %>
