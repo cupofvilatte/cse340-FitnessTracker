@@ -10,3 +10,14 @@ export async function getUserWorkouts(userId) {
     const result = await db.query(query, [userId]);
     return result.rows;
 }
+
+export async function createWorkout(userId, name, description) {
+    const query = `
+        INSERT INTO workouts (user_id, name, description, created_at)
+        VALUES ($1, $2, $3, NOW())
+        RETURNING id
+    `;
+    const values = [userId, name, description];
+    const result = await db.query(query, values);
+    return result.rows[0]; // Return created workout ID
+}
