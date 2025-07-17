@@ -46,6 +46,19 @@ nav a:hover {
     color: var(--background);
 }
 
+.nav-logout-btn {
+    color: grey;
+    background-color: var(--background);
+    border: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-logout-btn:hover {
+    color: black;
+}
+
 footer {
     text-align: center;
 }
@@ -157,6 +170,23 @@ footer {
     font-size: 1rem;
     margin-bottom: 1rem;
 }
+
+.favorite-form {
+  margin-top: 0.5rem;
+  text-align: right;
+}
+
+.favorite-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.favorite-button.favorited {
+  color: hotpink;
+}
+
 
 .exercise-list h3 {
     margin-top: 1rem;
@@ -456,6 +486,19 @@ footer {
     color: #555;
 }
 
+.workout-form {
+    max-width: 500px;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.add-workout-main h1 {
+    text-align: center;
+}
+
+
 .admin-tools .admin-links {
     display: flex;
     flex-direction: column;
@@ -486,26 +529,28 @@ footer {
     text-align: center;
 }
 
-.users-table {
+.users-table, .message-table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 1.5rem;
 }
 
-.users-table thead {
+.users-table thead, .message-table thead {
     background-color: var(--background-2);
     color: var(--text-2);
 }
 
 .users-table th,
-.users-table td {
+.users-table td,
+.message-table th,
+.message-table td {
     padding: 0.75rem 1rem;
-    border: 1px solid #ddd;
+    border: 1px solid black;
     text-align: left;
     vertical-align: middle;
 }
 
-.users-table tbody tr:hover {
+.users-table tbody tr:hover, .message-table tbody tr:hover {
     background-color: #f9f9f9;
 }
 

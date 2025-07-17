@@ -18,7 +18,7 @@ import workoutRoutes from './src/routes/workouts/index.js';
 import exerciseRoutes from './src/routes/exercises/index.js';
 
 import accountRoutes from './src/routes/accounts/index.js';
-
+import createWorkoutRoutes from './src/routes/dashboard/workouts.js';
 import favoritesRoutes from './src/routes/favorites/index.js';
 
 import adminUserRoutes from './src/routes/admin/user.js';
@@ -98,7 +98,7 @@ app.use('/workouts', workoutRoutes);
 app.use('/exercises', exerciseRoutes);
 
 app.use('/accounts', accountRoutes);
-
+app.use('/dashboard', createWorkoutRoutes);
 app.use('/favorites', favoritesRoutes);
 
 app.use('/admin/users', adminUserRoutes);
