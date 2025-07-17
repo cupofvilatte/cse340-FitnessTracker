@@ -31,6 +31,7 @@
 
     <section class="dashboard-section">
         <h2>Your Custom Workouts</h2>
+        <a href="/dashboard/workouts/create" class="cta-button">+ Create New Workout</a>
         <% if (customWorkouts && customWorkouts.length > 0) { %>
         <ul class="workout-list">
             <% customWorkouts.forEach(workout => { %>
